@@ -124,7 +124,28 @@ type Parser struct {
 // gtr.Report.
 func (p *Parser) Parse(r io.Reader) (gtr.Report, error) {
 	p.events = nil
+	//buffReader := bufio.NewReader(r)
+	//x := 1
+	//for line, isPrefix, err := buffReader.ReadLine(); err != io.EOF; line, isPrefix, err = buffReader.ReadLine() {
+	//	fmt.Printf("reading line %d\n: %s", x, string(line))
+	//	x++
+	//	if err != nil {
+	//		fmt.Println("oh no an error")
+	//		return p.report(p.events), err
+	//	}
+	//
+	//	if isPrefix {
+	//		fmt.Println("oh no a prefix")
+	//		return p.report(p.events), errors.New("line too long - not yet supported")
+	//	}
+	//
+	//	p.parseLine(string(line))
+	//}
 	s := bufio.NewScanner(r)
+	maxCapacity := 4 * 1024 * 1024
+	buf := make([]byte, maxCapacity)
+	s.Buffer(buf, maxCapacity)
+
 	for s.Scan() {
 		p.parseLine(s.Text())
 	}
