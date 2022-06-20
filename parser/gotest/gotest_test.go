@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jstemmer/go-junit-report/v2/gtr"
+	"github.com/theta-lake/go-junit-report/v2/gtr"
 
 	"github.com/google/go-cmp/cmp"
 )
